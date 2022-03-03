@@ -42,34 +42,37 @@ func runTournament () int {
 
   // fmt.Println("")
   fmt.Println("WEST BRACKET")
-  westWinner := runBracket(seeds)
+  westWinner := runBracket(seeds, 1)
   fmt.Println("")
   // fmt.Printf("West Winning Seed: %v\n\n", westWinner)
 
   fmt.Println("EAST BRACKET")
-  eastWinner := runBracket(seeds)
+  eastWinner := runBracket(seeds, 1)
   fmt.Println("")
   // fmt.Printf("East Winning Seed: %v\n\n", eastWinner)
 
   fmt.Println("SOUTH BRACKET")
-  southWinner := runBracket(seeds)
+  southWinner := runBracket(seeds, 1)
   fmt.Println("")
   // fmt.Printf("South Winning Seed: %v\n\n", southWinner)
 
   fmt.Println("MIDWEST BRACKET")
-  midwestWinner := runBracket(seeds)
+  midwestWinner := runBracket(seeds, 1)
   fmt.Println("")
   // fmt.Printf("Midwest Winning Seed: %v\n\n", midwestWinner)
 
 
   fmt.Println("FINAL FOUR")
-  finalWinner := runBracket([][]int{[]int{westWinner, eastWinner}, []int{southWinner, midwestWinner}})
+  finalWinner := runBracket([][]int{[]int{westWinner, eastWinner}, []int{southWinner, midwestWinner}}, 0)
   // fmt.Printf("FINALS WINNER: %v\n\n", finalWinner)
 
   return finalWinner
 }
 
-func runBracket (matchups [][]int) int {
+func runBracket (matchups [][]int, round int) int {
+  if (round != 0) {
+    fmt.Printf("Round %v\n", round)
+  }
   if len(matchups) == 1 {
     winnerIndex := determinWinner(matchups[0][0], matchups[0][1])
     fmt.Printf("%v seed beats %v seed\n", matchups[0][winnerIndex], matchups[0][1-winnerIndex])
@@ -85,7 +88,7 @@ func runBracket (matchups [][]int) int {
   for i:=0; i<len(nextSeeds); i=i+2 {
     nextMatchups = append(nextMatchups, []int{nextSeeds[i], nextSeeds[i+1]})
   }
-  return runBracket(nextMatchups)
+  return runBracket(nextMatchups, round+1)
 }
 
 func determinWinner(seed1 int, seed2 int) int {
