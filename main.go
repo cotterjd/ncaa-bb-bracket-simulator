@@ -81,6 +81,7 @@ func runBracket (matchups [][]int, round int) int {
   nextSeeds := []int{}
   for i:=0; i<len(matchups); i++ {
     winningIndex := determinWinner(matchups[i][0], matchups[i][1])
+    // TODO: print in a way where you know who wins if the seed is the same
     fmt.Printf("%v seed beats %v seed\n", matchups[i][winningIndex], matchups[i][1-winningIndex])
     nextSeeds = append(nextSeeds, matchups[i][winningIndex])
   }
