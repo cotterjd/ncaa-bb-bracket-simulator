@@ -63,14 +63,14 @@ func runTournament () int {
 
 
   fmt.Println("FINAL FOUR")
-  finalWinner := runBracket([][]int{[]int{westWinner, eastWinner}, []int{southWinner, midwestWinner}}, 0)
+  finalWinner := runBracket([][]int{[]int{westWinner, eastWinner}, []int{southWinner, midwestWinner}}, -1)
   // fmt.Printf("FINALS WINNER: %v\n\n", finalWinner)
 
   return finalWinner
 }
 
 func runBracket (matchups [][]int, round int) int {
-  if (round != 0) {
+  if (round >= 1) {
     fmt.Printf("Round %v\n", round)
   }
   if len(matchups) == 1 {
@@ -92,17 +92,36 @@ func runBracket (matchups [][]int, round int) int {
 }
 
 func determinWinner(seed1 int, seed2 int) int {
+  smallerSeed := seed1
+  largerSeed := seed2
+  if (seed1 > seed2) {
+    smallerSeed = seed2
+    largerSeed = seed1
+  }
   co := 10
   randCo := 0
   if len(os.Args) > 1 {
     randCo, _ = strconv.Atoi(os.Args[1])
   }
   rand.Seed(time.Now().UnixNano())
-  outcome := rand.Intn(seed1*co + seed2*co)+1
-  // fmt.Println(outcome, seed1, seed2)
-  if outcome <= seed1*co+randCo {
-    return 1
+  outcome := rand.Intn(smallerSeed*co + largerSeed*co)+1
+  if outcome <= smallerSeed*co+randCo {
+    // return underdog index
+    if seed2 > seed1 {
+      return 1
+    } else if seed1 > seed2 {
+      return 0
+    } else {
+      return 1
+    }
   } else {
-    return 0
+    // return favorite index
+    if seed2 > seed1 {
+      return 0
+    } else if seed1 > seed2 {
+      return 1
+    } else {
+      return 0
+    }
   }
 }
