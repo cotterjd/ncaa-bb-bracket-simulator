@@ -93,10 +93,8 @@ func runBracket (matchups [][]int, round int) int {
 
 func determinWinner(seed1 int, seed2 int) int {
   co := 10
-  randCo := 3
+  randCo := 0
   if len(os.Args) > 1 {
-    fmt.Println(os.Args)
-    fmt.Println(os.Args[1])
     randCo, _ = strconv.Atoi(os.Args[1])
   }
   rand.Seed(time.Now().UnixNano())
