@@ -4,6 +4,8 @@ import (
     "fmt"
     "math/rand"
     "time"
+    "os"
+    "strconv"
 )
 
 type Team struct{
@@ -23,8 +25,6 @@ func main() {
   //   total = total + float64(winners[i])
   // }
   // fmt.Println("Mean:", total / float64(len(winners)))
-////   fmt.Println("Median:", median)
-////   fmt.Println("Mode:", mode)
 
   // oneSeeds := 0
   // for i:=0; i<len(winners); i++ {
@@ -41,28 +41,28 @@ func runTournament () int {
   seeds := [][]int{[]int{1, 16}, []int{8, 9}, []int{5, 12}, []int{4, 13}, []int{6, 11}, []int{3, 14}, []int{7, 10}, []int{2, 15}}
 
   // fmt.Println("")
-  fmt.Println("West Bracket")
+  fmt.Println("WEST BRACKET")
   westWinner := runBracket(seeds)
   fmt.Println("")
   // fmt.Printf("West Winning Seed: %v\n\n", westWinner)
 
-  fmt.Println("East Bracket")
+  fmt.Println("EAST BRACKET")
   eastWinner := runBracket(seeds)
   fmt.Println("")
   // fmt.Printf("East Winning Seed: %v\n\n", eastWinner)
 
-  fmt.Println("South Bracket")
+  fmt.Println("SOUTH BRACKET")
   southWinner := runBracket(seeds)
   fmt.Println("")
   // fmt.Printf("South Winning Seed: %v\n\n", southWinner)
 
-  fmt.Println("Midwest Bracket")
+  fmt.Println("MIDWEST BRACKET")
   midwestWinner := runBracket(seeds)
   fmt.Println("")
   // fmt.Printf("Midwest Winning Seed: %v\n\n", midwestWinner)
 
 
-  fmt.Println("Final Four")
+  fmt.Println("FINAL FOUR")
   finalWinner := runBracket([][]int{[]int{westWinner, eastWinner}, []int{southWinner, midwestWinner}})
   // fmt.Printf("FINALS WINNER: %v\n\n", finalWinner)
 
@@ -90,10 +90,16 @@ func runBracket (matchups [][]int) int {
 
 func determinWinner(seed1 int, seed2 int) int {
   co := 10
+  randCo := 3
+  if len(os.Args) > 1 {
+    fmt.Println(os.Args)
+    fmt.Println(os.Args[1])
+    randCo, _ = strconv.Atoi(os.Args[1])
+  }
   rand.Seed(time.Now().UnixNano())
   outcome := rand.Intn(seed1*co + seed2*co)+1
   // fmt.Println(outcome, seed1, seed2)
-  if outcome <= seed1*co+3 {
+  if outcome <= seed1*co+randCo {
     return 1
   } else {
     return 0
