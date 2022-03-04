@@ -74,15 +74,32 @@ func runBracket (matchups [][]int, round int) int {
     fmt.Printf("Round %v\n", round)
   }
   if len(matchups) == 1 {
-    winnerIndex := determinWinner(matchups[0][0], matchups[0][1])
-    fmt.Printf("%v seed beats %v seed\n", matchups[0][winnerIndex], matchups[0][1-winnerIndex])
+    finalistSeed1 := matchups[0][0]
+    finalistSeed2 := matchups[0][1]
+    winnerIndex := determinWinner(finalistSeed1, finalistSeed2)
+    sameSeedText := ""
+    if finalistSeed1 == finalistSeed2 {
+      sameSeedText = "(top team)"
+      if winnerIndex == 1 {
+        sameSeedText = "(bottom team)"
+      }
+    }
+    fmt.Printf("%v seed%s beats %v seed\n", matchups[0][winnerIndex], sameSeedText, matchups[0][1-winnerIndex])
     return matchups[0][winnerIndex]
   }
   nextSeeds := []int{}
   for i:=0; i<len(matchups); i++ {
-    winningIndex := determinWinner(matchups[i][0], matchups[i][1])
-    // TODO: print in a way where you know who wins if the seed is the same
-    fmt.Printf("%v seed beats %v seed\n", matchups[i][winningIndex], matchups[i][1-winningIndex])
+    teamOneSeed := matchups[i][0]
+    teamTwoSeed := matchups[i][1]
+    winningIndex := determinWinner(teamOneSeed, teamTwoSeed)
+    sameSeedText := ""
+    if teamOneSeed == teamTwoSeed {
+      sameSeedText = "(top team)"
+      if winningIndex == 1 {
+        sameSeedText = "(bottom team)"
+      }
+    }
+    fmt.Printf("%v seed%s beats %v seed\n", matchups[i][winningIndex], sameSeedText, matchups[i][1-winningIndex])
     nextSeeds = append(nextSeeds, matchups[i][winningIndex])
   }
   nextMatchups := [][]int{}
