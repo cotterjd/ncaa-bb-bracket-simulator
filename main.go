@@ -31,7 +31,7 @@ func main() {
 
   if isUpsetWeighted == `yes` {
     if len(os.Args) <= 3 {
-      fmt.Println(`Pick a number between 1 and 145, 1 being the smallest advantage an upsetter has in the the proceeding matches and 145 being the value that would make an upsetter win every proceeding match`)
+      fmt.Println(`Pick a number between 1 and 145, 1 being the smallest advantage an upsetter has in the the proceeding matches and 145 being the value that would make an upsetter win every proceeding match. Leaving blank will default the value to 1`)
       fmt.Scanln(&upsetBonus)
     }
     // fmt.Println(`Do you want an underdog team that causes an upset to have an advantage in there next game? ("y" for yes."n" for no to keep all odds the same regardless of previous wins`)

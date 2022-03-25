@@ -14,7 +14,7 @@ type Team struct{
 }
 
 var upsetCoefficient int
-var upsetterMultiplier int
+var upsetterMultiplier int = 1
 func RunUpsetWeightedTournament (scaleTips int, upsetterBonus int) int {
   upsetCoefficient = scaleTips
   upsetterMultiplier = upsetterBonus

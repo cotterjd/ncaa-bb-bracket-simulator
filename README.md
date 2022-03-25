@@ -2,7 +2,7 @@
 Script built in Go that will simulate a ncaa march madness tournament. 
 
 I've spent hours on brackets that don't do any better than brackets I spend two seconds on. It all seems somewhat random in March Madness. 
-So I built this script that will simulate a March Madness tournament to help you fill out a bracket. 
+So I built this script that will simulate a March Madness tournament to help you fill out a bracket quickly with configurable odds. 
 
 ## Running Script
 `sudo apt install -y golang-go`<br>
@@ -18,18 +18,13 @@ So I built this script that will simulate a March Madness tournament to help you
 `go run main.go`<br>
 
 ### command-line arguments
-coefficient - pass this argument in to give underdogs more or less of chance of winning (default is 0).<br>
-An example of default behavior is if a 1 seed plays a 16 seed the 1 seed has 16 times the chance of winning. If a 5 seed played a 6 seed, then the 5 seed has a 6/11 chance of winning.<br> 
-The following will give underdogs a slightly higher chance of winning. 
-```
-go run main.go 1
-```
-The following will give underdogs a slightly lower chance of winning.
-```
-go run main.go -1
-```
-This value can be any integer. Any value -10 and below will always result in a 1 seed winning the tournament. <br>
-A value of 160 or above will always result in a 16 seed winning the tournament. <br>
+passing no command-line arguments will prompt questions about how you want to configure the odds. 
 
+You can also pass the configuration in and skip the questions
 
-![bracket2](https://user-images.githubusercontent.com/2576700/156664831-b0fbd444-7e3b-4e4c-9e89-0236c850c217.png)
+./bracket.linux <underdog-advantage> <give-upsetters-advantage> <upsett-advantage> <verbose-mode>
+
+For example, `./brack.linux 1 yes 1 true` will give all underdogs a slight advantage and also give upsetters a slight advantage in the their proceeding matches and turns on verbose mode. Verbose mode will show you the numbers that outcome is based on
+
+If you have verbose mode on then you will see lines like this<br>
+`Rand(1, 170) = 32 <= 13   1 seed beats 16 seed` this means that a random number was generated between 1 and 170 and that number had to be between 13 to have the 16 seed upset the 1 seed.
