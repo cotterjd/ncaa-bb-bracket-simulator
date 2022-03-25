@@ -4,10 +4,17 @@ Script built in Go that will simulate a ncaa march madness tournament.
 I've spent hours on brackets that don't do any better than brackets I spend two seconds on. It all seems somewhat random in March Madness. 
 So I built this script that will simulate a March Madness tournament to help you fill out a bracket. 
 
-## Getting Started
+## Running Script
 `sudo apt install -y golang-go`<br>
 `git@github.com:cotterjd/ncaa-bb-bracket-simulator.git`<br>
 `cd ncaa-bb-bracket-simulator`<br>
+`./bracket.linux`<br>
+
+## Developing
+`sudo apt install -y golang-go`<br>
+`git@github.com:cotterjd/ncaa-bb-bracket-simulator.git`<br>
+`cd ncaa-bb-bracket-simulator`<br>
+`vim main.go`<br>
 `go run main.go`<br>
 
 ### command-line arguments
