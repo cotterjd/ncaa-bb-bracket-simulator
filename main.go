@@ -37,7 +37,7 @@ func main() {
   runTournament()
 }
 
-func runTournament () int {
+func runTournament () {
   matchups := [][]Team{
            []Team{Team{1, 0, 0}, Team{16, 0, 0}},
            []Team{Team{8, 0, 0}, Team{9, 0, 0}},
@@ -61,8 +61,6 @@ func runTournament () int {
       fmt.Printf("FINALS WINNER: %v\n\n", finalWinner)
     }
   }
-
-  return westWinner.Seed // finalWinner
 }
 
 func runRegion (title string, matchups [][]Team) Team {
@@ -139,7 +137,7 @@ func determinWinner(team1 Team, team2 Team) Team {
   // ex: with 1 seed and 16 seed
   // random number between 1 and 1*10+16*10 = 10+160 = 170 <= 1*10 + 0
   // random number between 1 and 170 <= 10
-  if len(os.Args) >= 3 {
+  if len(os.Args) > 3 {
     if os.Args[3] == `true` {
       fmt.Printf(`Rand(%v, %v) = %v <= %v   `, 1, favorite.Seed*coefficient + underdog.Seed*coefficient, outcome, favorite.Seed*coefficient+gUnderdogAdvantage+underdog.NumUpsets)
     }
