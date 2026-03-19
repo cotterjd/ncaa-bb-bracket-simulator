@@ -54,7 +54,7 @@ func runTournament () {
   midwestWinner := runRegion("MIDWEST BRACKET", matchups)
 
   fmt.Println("FINAL FOUR")
-  finalWinner := runBracket([][]Team{[]Team{westWinner, eastWinner}, []Team{southWinner, midwestWinner}}, -1)
+  finalWinner := runBracket([][]Team{[]Team{eastWinner, southWinner}, []Team{westWinner, midwestWinner}}, -1)
 
   if len(os.Args) > 3 {
     if os.Args[3] == `true` {
